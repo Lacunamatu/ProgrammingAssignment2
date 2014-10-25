@@ -1,13 +1,14 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This combination of functions calculates and stores the inverse of a matrix 
+## in cache for reuse untill the matrix is changed.
 
-## Write a short comment describing this function
+## makeCacheMatrix: This function creates a special "matrix" object that can
+## cache its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-    dimx<- dim(x)
+    ## get dimensions of x and create an empty inverse matrix of that size
+    dimx<- dim(x) 
     i <- matrix(rep(NA), nrow =dimx[1], ncol = dimx[2])
     setmatrix <- function(y){
-        ## stuff
         x<<- y
         i <- matrix(rep(NA), nrow =dimx[1], ncol = dimx[2])
     }
@@ -15,10 +16,11 @@ makeCacheMatrix <- function(x = matrix()) {
         x
     }
     setInv <- function (Inversem) {
-      i <<-Inversem  
-      
+        i <<-Inversem  
     }
     getInv <- function () {
+        ## Compare the Inverse matrix to an NA matrix and return NULL if they are 
+        ## identical
         li <-matrix(rep(NA), nrow =dimx[1], ncol = dimx[2])
         if(identical(i,li)) return(NULL)
         else return(i)
@@ -30,7 +32,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve: This function computes the inverse of the special "matrix" 
+## returned by makeCacheMatrix above. If the inverse has already been 
+## calculated (and the matrix has not changed), then the cachesolve should 
+## retrieve the inverse from the cache.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
